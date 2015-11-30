@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="AppController">
+  <head>
+    <base href="/" />
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+
+    <title ng-bind="page.title"></title>
+
+    <link rel="stylesheet" href="/bower_components/materialize/dist/css/materialize.min.css" charset="utf-8"/>
+    <link rel="stylesheet" href="/stylesheets/style.css" charset="utf-8"/>
+
+    <script src="/bower_components/angular/angular.min.js" charset="utf-8"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js" charset="utf-8"></script>
+    <script src="/bower_components/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="/bower_components/materialize/dist/js/materialize.min.js" charset="utf-8"></script>
+    <script src="/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js" charset="utf-8"></script>
+    <script src="/javascripts/ngMaterialize/dist/ngMaterialize.js" charset="utf-8"></script>
+    <script src="/javascripts/app.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <div class="progress" ng-show="page.isLoading">
+      <div class="indeterminate"></div>
+    </div>
+
+    <ui-view ng-hide="page.isLoading" />
+  </body>
+</html>

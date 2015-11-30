@@ -1,0 +1,30 @@
+<ng-include src="'/views/modules/header.html'"></ng-include>
+
+<main class="grey-text text-darken-2">
+  <div id="feed" class="row" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
+
+    <div ng-repeat="item in starship.list">
+      <a ui-sref="app.feed.detail({id: 1})">
+        <div ng-if="item.length <= 1000">
+          <div class="col s12 m12 z-depth-1 hoverable waves-effect waves-light story-cover yellow starship-card" style="font-family: 'Lucida Console', Monaco, monospace;">
+            <h3> {{item.name}} </h3>
+            <p> model: {{item.model}} </p>
+            <p> class: {{item.starship_class}} </p>
+            <p> cost: {{item.cost_in_credits}} </p>
+            <br/>
+          </div>
+        </div>
+        <div ng-if="item.length > 1000">
+          <div class="col s12 m12 z-depth-1 hoverable waves-effect waves-light story-cover yellow starship-card darken-3">
+            <h3> {{item.name}} </h3>
+            <p> model: {{item.model}} </p>
+            <p> class: {{item.starship_class}} </p>
+            <p> cost: {{item.cost_in_credits}} </p>
+            <br/>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div ng-show="isLoading" class="col s12 m12 z-depth-1 hoverable waves-effect waves-light story-cover yellow starship-card">loading</div>
+  </div>
+</main>

@@ -1,0 +1,79 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/bower_components/material-design-icons/iconfont/MaterialIcons-Regular.eot);
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(/bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff2) format('woff2'),
+       url(/bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff) format('woff'),
+       url(/bower_components/material-design-icons/iconfont/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
+}
+
+@font-face {
+  font-family: 'Londrina Solid';
+  src: url(/fonts/LondrinaSolid-Regular.ttf) format('truetype');
+}
+
+body, ui-view {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.progress {
+  margin: 0;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.navbar-fixed * {
+  height: 48px !important;
+  line-height: 48px !important;
+}
+
+nav form * {
+  font-size: 20px !important;
+}
+
+#search-input {
+  padding-left: 40px;
+}
+
+#search-close {
+  right: 0;
+}
+
+.brand-logo {
+  font-family: 'Londrina Solid';
+}
+
+#feed {
+  margin: auto 64px auto 64px;
+}
+
+.starship-card{
+  margin-bottom: 25px;
+}
