@@ -1,7 +1,6 @@
 var app = angular.module('app', ['ui.router', 'ngMaterialize', 'infinite-scroll']);
 
 var appName = 'Starships of Star Wars';
-var starshipPage = 0;
 var nextPage = "";
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -18,8 +17,8 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       page.title = 'Home | ' + appName;
     },
     resolve: {
-      starship: function(starship) {
-        return starship;
+      starships: function(starship) {
+        return starship.getPage(1);
       }
     }
   });
@@ -29,7 +28,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     onEnter: function($state, $modal) {
       var p = $modal.open({
         templateUrl: '/views/detail.html',
-        controller: 'StarshipController',
+        controller: 'StarshipModalController',
         fixedFooter: true
       }).finally(function() {
         $state.go('^');
@@ -37,13 +36,36 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     },
     resolve: {
       starship: function($stateParams, starship) {
-        starship.getAll().success(function() {
-          starship.detail = starship.get($stateParams.id);
-        });
+        starship.detail = starship.get($stateParams.id);
       }
     }
   });
 
+  $stateProvider.state('app.moredetail', {
+    url: '/moredetail/:url',
+    templateUrl: '/views/moredetail.html',
+    controller: 'StarshipDetailController',
+    onEnter: function(page) {
+      page.title = 'Starship | ' + appName;
+    },
+    resolve: {
+      starships: function($stateParams, starship) {
+        // Workaround caused by no id in API data
+        //
+        return starship.getStarship(decodeURIComponent($stateParams.url));
+      }
+    }
+  });
+
+  $stateProvider.state('app.error', {
+    url: '/error',
+    templateUrl: '/views/error.html',
+    onEnter: function(page) {
+      page.title = 'Not found | ' + appName;
+    }
+  });
+
+  $urlRouterProvider.otherwise('/error');
   $locationProvider.html5Mode(true);
 });
 
@@ -71,6 +93,12 @@ app.factory('starship', function($http){
     });
   };
 
+  o.getStarship = function(url){
+    return $http.get(url).success(function(data) {
+      o.detail = data;
+    });
+  };
+
   o.getPage = function(page, callback) {
     return $http.get('http://swapi.co/api/starships/?page='+ page).success(function(data) {
       data.results.forEach(function(item) {
@@ -82,10 +110,7 @@ app.factory('starship', function($http){
   };
 
   o.get = function(id) {
-    var result = null;
-    o.list.forEach(function(item) {
-      if (item.id == id) result = item;
-    });
+    var result = o.list[id];
     return result;
   };
 
@@ -113,15 +138,30 @@ app.controller('AppController', function($scope, page) {
 });
 
 app.controller('StarshipController', function($scope, starship){
+    var starshipPage = 2;
     $scope.starship = starship;
     $scope.isLoading = false;
 
     $scope.loadMore = function () {
         if (!$scope.isLoading && nextPage != null){
           $scope.isLoading = true;
-          $scope.starship.list.concat($scope.starship.getPage(++starshipPage, function(){
+          $scope.starship.list.concat($scope.starship.getPage(starshipPage++, function(){
               $scope.isLoading = false;
           }));
         }
     }
+});
+
+app.controller('StarshipModalController', function($scope, $stateParams, $modalInstance, starship){
+    $scope.starship = starship;
+    $scope.id = $stateParams.id;
+
+    $scope.close = function() {
+      $modalInstance.close();
+    };
+});
+
+app.controller('StarshipDetailController', function($scope, $stateParams, starship){
+    $scope.id = $stateParams.id;
+    $scope.starship = starship;
 });

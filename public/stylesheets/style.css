@@ -31,8 +31,12 @@
 }
 
 @font-face {
-  font-family: 'Londrina Solid';
-  src: url(/fonts/LondrinaSolid-Regular.ttf) format('truetype');
+  font-family: 'Starjedi';
+  src: url(/fonts/Starjedi.ttf) format('truetype');
+}
+
+body{
+  padding-bottom: 20px;
 }
 
 body, ui-view {
@@ -67,7 +71,7 @@ nav form * {
 }
 
 .brand-logo {
-  font-family: 'Londrina Solid';
+  font-family: 'Starjedi';
 }
 
 #feed {
@@ -76,4 +80,12 @@ nav form * {
 
 .starship-card{
   margin-bottom: 25px;
+}
+
+#starship-detail {
+  margin: 0 64px 0 64px;
+}
+
+#error-text {
+  margin: 0 64px 0 64px;
 }
