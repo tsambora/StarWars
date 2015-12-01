@@ -49,6 +49,10 @@ main {
   flex: 1 0 auto;
 }
 
+.roundElement	{
+	border-radius: 5px;
+}
+
 .navbar-fixed * {
   height: 48px !important;
   line-height: 48px !important;

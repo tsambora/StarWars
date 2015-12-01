@@ -141,7 +141,7 @@ app.controller('StarshipController', function($scope, starship){
     $scope.loadMore = function () {
         if (!$scope.isLoading && nextPage != null){
           $scope.isLoading = true;
-          $scope.starship.list.concat($scope.starship.getPage(starshipPage++, function(next){
+          $scope.starship.list.concat($scope.starship.getPage(starshipPage++, function(results, next){
               nextPage = next;
               $scope.isLoading = false;
           }));
