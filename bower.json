@@ -10,6 +10,7 @@
     "angular-ui-router": "~0.2.15",
     "jquery": "~2.1.4",
     "material-design-icons": "~2.0.0",
-    "materialize": "materialize#~0.97.1"
+    "materialize": "materialize#~0.97.1",
+    "ngInfiniteScroll": "~1.2.1"
   }
 }
