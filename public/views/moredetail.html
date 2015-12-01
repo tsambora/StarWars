@@ -1,11 +1,11 @@
-<div id="starship-moredetail" class="row">
+<div id="starship-detail-container" class="row">
 
-  <div id="starship-detail" class="col s12 m6 left">
-    <h1>{{starship.detail.name}}</h1>
-    <h3>{{starship.detail.model}}</h3>
+  <div id="starship-detail-table" class="col s12 m7 z-depth-1 left yellow darken-1 blue-text text-darken-3">
+    <h1 class="themed">{{starship.detail.name}}</h1>
+    <h5 id="starship-detail-model-label" class="themed">{{starship.detail.model}}</h5>
     <table class="bordered striped">
           <tbody>
-            <tr>
+            <tr class="blue darken-3 yellow-text text-darken-1">
               <td>Manufacturer</td>
               <td><b>{{starship.detail.manufacturer}}</b></td>
             </tr>
@@ -13,7 +13,7 @@
               <td>Cost</td>
               <td><b>{{starship.detail.cost_in_credits}}</b></td>
             </tr>
-            <tr>
+            <tr class="blue darken-3 yellow-text text-darken-1">
               <td>Class</td>
               <td><b>{{starship.detail.starship_class}}</b></td>
             </tr>
@@ -21,7 +21,7 @@
               <td>Length</td>
               <td><b>{{starship.detail.length}}</b></td>
             </tr>
-            <tr>
+            <tr class="blue darken-3 yellow-text text-darken-1">
               <td>Max atmosphering speed</td>
               <td><b>{{starship.detail.max_atmosphering_speed}}</b></td>
             </tr>
@@ -29,7 +29,7 @@
               <td>Crew</td>
               <td><b>{{starship.detail.crew}}</b></td>
             </tr>
-            <tr>
+            <tr class="blue darken-3 yellow-text text-darken-1">
               <td>Passengers</td>
               <td><b>{{starship.detail.passengers}}</b></td>
             </tr>
@@ -37,7 +37,7 @@
               <td>Cargo Capacity</td>
               <td><b>{{starship.detail.cargo_capacity}}</b></td>
             </tr>
-            <tr>
+            <tr class="blue darken-3 yellow-text text-darken-1">
               <td>Consumables</td>
               <td><b>{{starship.detail.consumables}}</b></td>
             </tr>
@@ -45,7 +45,7 @@
               <td>Hyperdrive Rating</td>
               <td><b>{{starship.detail.hyperdrive_rating}}</b></td>
             </tr>
-            <tr>
+            <tr class="blue darken-3 yellow-text text-darken-1">
               <td>MGLT</td>
               <td><b>{{starship.detail.MGLT}}</b></td>
             </tr>
@@ -53,17 +53,28 @@
         </table>
   </div>
 
-  <div class="col s12 m4 z-depth-1 white starship-card" style="margin-top: 40px;">
-    <h1><b>Similar starships:</b></h1>
-    <div ng-repeat="item in starship.similar">
+  <div id="starship-detail-similar-container" class="col s12 m4 z-depth-1 right yellow darken-1 blue-text text-darken-3 starship-card">
+    <h5 id="starship-detail-similar-label" class="themed"><b>Similar starships:</b></h5>
+    <div id="starship-detail-similar-list" ng-repeat="item in starship.similar" class="chip blue darken-3 yellow-text">
       <div ng-if="item.name != starship.detail.name">
-        <a ui-sref="app.moredetail({url: item.url})">{{item.name}}</a>
+        <a ui-sref="app.moredetail({url: item.url})" class="yellow-text text-darken-1">{{item.name}}</a>
       </div>
     </div>
-    <div style="text-align:center">
-      <img ng-show="isLoading" src="/images/loading.gif" style="margin: 20px 0 30px 0; width: 30px; height: auto: "/>
+    <br/>
+    <div class="center-align">
+      <div id="starship-detail-similar-loading-indicator" ng-show="isLoading" class="preloader-wrapper small active">
+        <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <a ng-hide="isLoading || nextPage==null" class="btn waves-effect teal lighten-1 white-text" ng-click="loadMoreSimilar()" style="margin: 20px 0 20px 0;">more</a>
+    <a id="starship-detail-similar-load-button" ng-hide="isLoading || nextPage==null" class="btn right waves-effect blue darken-3 yellow-text text-darken-1" ng-click="loadMoreSimilar()">more</a>
 
   </div>
 </div>

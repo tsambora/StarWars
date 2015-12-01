@@ -41,10 +41,6 @@ body, ui-view {
   flex-direction: column;
 }
 
-.progress {
-  margin: 0;
-}
-
 main {
   flex: 1 0 auto;
 }
@@ -53,41 +49,83 @@ main {
 	border-radius: 5px;
 }
 
+.themed {
+  font-family: 'Starjedi';
+}
+
+.progress {
+  margin: 0;
+}
+
 .navbar-fixed * {
   height: 48px !important;
   line-height: 48px !important;
-}
-
-nav form * {
-  font-size: 20px !important;
-}
-
-#search-input {
-  padding-left: 40px;
-}
-
-#search-close {
-  right: 0;
 }
 
 .brand-logo {
   font-family: 'Starjedi';
 }
 
-#feed {
-  margin: auto 64px auto 64px;
+#feed-container {
+  margin: auto 50px auto 60px;
 }
 
-.starship-card{
+#feed-greetings {
+  padding-left: 25px;
+  padding-bottom: 10px;
+}
+
+#feed-loading-indicator {
+  text-align: center;
+}
+
+.starship-card {
   margin-bottom: 25px;
+  padding-left: 25px !important;
 }
 
-#starship-detail {
-  margin: 0 64px 0 64px;
+#detail-underline {
+  margin-bottom: 15px;
+  height: 2px;
+  border: 0;
+  background-color: blue;
 }
 
-#starship-moredetail {
-  margin: 0 0 0 0;
+#starship-detail-container {
+  margin: auto 60px auto 60px;
+}
+
+#starship-detail-table {
+  padding-left:25px;
+  padding-right:25px;
+  padding-bottom: 25px;
+}
+
+#starship-detail-model-label {
+  margin-bottom:25px;
+}
+
+#starship-detail-similar-container {
+  padding-left:25px;
+  padding-right:25px;
+  padding-bottom: 15px;
+}
+
+#starship-detail-similar-label {
+  margin-bottom: 15px;
+  padding-left: 8px;
+}
+
+#starship-detail-similar-list {
+  margin: 2px;
+}
+
+#starship-detail-similar-loading-indicator {
+  margin-top:20px;
+}
+
+#starship-detail-similar-load-button {
+  margin-top: 20px;
 }
 
 #error-text {

@@ -1,8 +1,8 @@
 <main class="grey-text text-darken-2">
-  <div id="feed" class="row" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
+  <div id="feed-container" class="row" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
 
-    <div class="col s12 m4 z-depth-1 blue darken-3 yellow-text text-darken-1 starship-card roundElement" style="padding-left: 25px; padding-bottom: 20px;">
-      <h3 style="font-family: 'Starjedi';">Welcome to SSSW!</h3>
+    <div id="feed-greetings" class="col s12 m4 offset-m1 z-depth-1 blue darken-3 yellow-text text-darken-1 roundElement">
+      <h5 class="themed">Welcome to SSSW!</h5>
       <h5>This site contains information regarding amazing starships appeared in Star Wars movies. </h5>
       <h5>Click on the card to view a more detailed information. </h5>
     </div>
@@ -10,14 +10,14 @@
     <div ng-repeat="item in starship.list" class="col s12 m8 right">
       <a ui-sref="app.feed.detail({id: $index})">
         <div ng-if="item.length <= 1000">
-          <div class="col s12 m12 z-depth-1 hoverable waves-effect waves-light blue darken-3 yellow-text text-darken-1 starship-card roundElement" style="font-family: 'Starjedi'; padding-left: 25px;">
+          <div class="col s12 m12 z-depth-1 hoverable waves-effect waves-light blue darken-3 yellow-text text-darken-1 starship-card themed roundElement">
             <h3> {{item.name}} </h3>
             <p> {{item.model}} </p>
             <br/>
           </div>
         </div>
         <div ng-if="item.length > 1000">
-          <div class="col s12 m12 z-depth-1 hoverable waves-effect waves-light blue darken-3 red-text text-darken-1 starship-card roundElement" style="font-family: 'Starjedi'; padding-left: 25px;">
+          <div class="col s12 m12 z-depth-1 hoverable waves-effect waves-light blue darken-3 red-text text-darken-1 starship-card themed roundElement">
             <h3> {{item.name}} </h3>
             <p class="col"> {{item.model}} </p>
             <p class="col s2 right right-align"> Heavy ship! </p>
@@ -27,8 +27,9 @@
       </a>
     </div>
 
-    <div class="col s12 m8 right" style="text-align:center">
-      <img id="feed-loading" ng-show="isLoading" src="/images/loading.gif" />
+    <div id="feed-loading-indicator" class="col s12 m8 right">
+      <img ng-show="isLoading" src="/images/loading.gif" />
     </div>
+
   </div>
 </main>
