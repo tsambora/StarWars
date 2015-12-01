@@ -133,9 +133,12 @@ app.controller('AppController', function($scope, page) {
 });
 
 app.controller('StarshipController', function($scope, starship){
+    var myDataRef = new Firebase("https://scorching-inferno-2887.firebaseio.com/");
     var starshipPage = 2;
     var nextPage = "";
+    $scope.user = null;
     $scope.starship = starship;
+    $scope.starship.chats = [];
     $scope.isLoading = false;
 
     $scope.loadMore = function () {
@@ -147,6 +150,17 @@ app.controller('StarshipController', function($scope, starship){
           }));
         }
     }
+
+    $scope.addChat = function (user) {
+      myDataRef.push({name: user.name, message: user.message});
+      $scope.user = null;
+    }
+
+    myDataRef.on('child_added', function(snapshot) {
+      var message = snapshot.val();
+      $scope.starship.chats.push(message);
+      $scope.$apply();
+    });
 });
 
 app.controller('StarshipModalController', function($scope, $stateParams, $modalInstance, starship){

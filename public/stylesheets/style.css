@@ -71,8 +71,12 @@ main {
 }
 
 #feed-greetings {
-  padding-left: 25px;
-  padding-bottom: 10px;
+  margin-top: 0px !important;
+  padding: 5px 25px 10px 25px;
+}
+
+#feed-commentary {
+  padding: 5px 25px 10px 25px;
 }
 
 #feed-loading-indicator {
