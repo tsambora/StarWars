@@ -1,15 +1,69 @@
-<div id="starship-detail" class="col s12 m12">
-  <h1>{{starship.detail.name}}</h1>
-  <h3>{{starship.detail.model}}</h3>
-  <h5>Manufacturer: <b>{{starship.detail.manufacturer}}</b></h5>
-  <h5>Cost: <b>{{starship.detail.cost_in_credits}} credits</b></h5>
-  <h5>Class: <b>{{starship.detail.starship_class}}</b></h5>
-  <h5>Length: <b>{{starship.detail.length}}</b></h5>
-  <h5>Max atmosphering speed: <b>{{starship.detail.max_atmosphering_speed}}</b></h5>
-  <h5>Crew: <b>{{starship.detail.crew}}</b></h5>
-  <h5>Passengers: <b>{{starship.detail.passengers}}</b></h5>
-  <h5>Cargo Capacity: <b>{{starship.detail.cargo_capacity}}</b></h5>
-  <h5>Consumables: <b>{{starship.detail.consumables}}</b></h5>
-  <h5>Hyperdrive Rating: <b>{{starship.detail.hyperdrive_rating}}</b></h5>
-  <h5>MGLT: <b>{{starship.detail.MGLT}}</b></h5>
+<div id="starship-moredetail" class="row">
+
+  <div id="starship-detail" class="col s12 m6 left">
+    <h1>{{starship.detail.name}}</h1>
+    <h3>{{starship.detail.model}}</h3>
+    <table class="bordered striped">
+          <tbody>
+            <tr>
+              <td>Manufacturer</td>
+              <td><b>{{starship.detail.manufacturer}}</b></td>
+            </tr>
+            <tr>
+              <td>Cost</td>
+              <td><b>{{starship.detail.cost_in_credits}}</b></td>
+            </tr>
+            <tr>
+              <td>Class</td>
+              <td><b>{{starship.detail.starship_class}}</b></td>
+            </tr>
+            <tr>
+              <td>Length</td>
+              <td><b>{{starship.detail.length}}</b></td>
+            </tr>
+            <tr>
+              <td>Max atmosphering speed</td>
+              <td><b>{{starship.detail.max_atmosphering_speed}}</b></td>
+            </tr>
+            <tr>
+              <td>Crew</td>
+              <td><b>{{starship.detail.crew}}</b></td>
+            </tr>
+            <tr>
+              <td>Passengers</td>
+              <td><b>{{starship.detail.passengers}}</b></td>
+            </tr>
+            <tr>
+              <td>Cargo Capacity</td>
+              <td><b>{{starship.detail.cargo_capacity}}</b></td>
+            </tr>
+            <tr>
+              <td>Consumables</td>
+              <td><b>{{starship.detail.consumables}}</b></td>
+            </tr>
+            <tr>
+              <td>Hyperdrive Rating</td>
+              <td><b>{{starship.detail.hyperdrive_rating}}</b></td>
+            </tr>
+            <tr>
+              <td>MGLT</td>
+              <td><b>{{starship.detail.MGLT}}</b></td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+
+  <div class="col s12 m4 z-depth-1 white starship-card" style="margin-top: 40px;">
+    <h1><b>Similar starships:</b></h1>
+    <div ng-repeat="item in starship.similar">
+      <div ng-if="item.name != starship.detail.name">
+        <a ui-sref="app.moredetail({url: item.url})">{{item.name}}</a>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <img ng-show="isLoading" src="/images/loading.gif" style="margin: 20px 0 30px 0; width: 30px; height: auto: "/>
+    </div>
+    <a ng-hide="isLoading || nextPage==null" class="btn waves-effect teal lighten-1 white-text" ng-click="loadMoreSimilar()" style="margin: 20px 0 20px 0;">more</a>
+
+  </div>
 </div>

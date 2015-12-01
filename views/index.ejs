@@ -28,6 +28,9 @@
       <img id="feed-loading" ng-show="page.isLoading" src="/images/loading.gif" />
     </div>
 
-    <ui-view ng-hide="page.isLoading"/>
+    <main>
+      <ui-view ng-hide="page.isLoading"/>
+    </main>
+    <ng-include src="'/views/modules/footer.html'"></ng-include>
   </body>
 </html>

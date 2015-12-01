@@ -1,7 +1,6 @@
 var app = angular.module('app', ['ui.router', 'ngMaterialize', 'infinite-scroll']);
 
 var appName = 'Starships of Star Wars';
-var nextPage = "";
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider.state('app', {
@@ -53,6 +52,9 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         // Workaround caused by no id in API data
         //
         return starship.getStarship(decodeURIComponent($stateParams.url));
+      },
+      starshipSimilar: function($stateParams, starship){
+        return starship.getPage(1);
       }
     }
   });
@@ -87,31 +89,24 @@ app.factory('starship', function($http){
     list: []
   };
 
-  o.getAll = function() {
-    return $http.get('http://swapi.co/api/starships/').success(function(data) {
-      angular.copy(data, o.list);
-    });
-  };
-
-  o.getStarship = function(url){
-    return $http.get(url).success(function(data) {
-      o.detail = data;
-    });
-  };
-
   o.getPage = function(page, callback) {
-    return $http.get('http://swapi.co/api/starships/?page='+ page).success(function(data) {
+    return $http.get('http://swapi.co/api/starships/?page=' + page).success(function(data) {
       data.results.forEach(function(item) {
         o.list.push(item);
       });
-      nextPage = data.next;
-      if (callback) callback();
+      if (callback) callback(data.results, data.next);
     });
   };
 
   o.get = function(id) {
     var result = o.list[id];
     return result;
+  };
+
+  o.getStarship = function(url){
+    return $http.get(url).success(function(data) {
+      o.detail = data;
+    });
   };
 
   return o;
@@ -139,13 +134,15 @@ app.controller('AppController', function($scope, page) {
 
 app.controller('StarshipController', function($scope, starship){
     var starshipPage = 2;
+    var nextPage = "";
     $scope.starship = starship;
     $scope.isLoading = false;
 
     $scope.loadMore = function () {
         if (!$scope.isLoading && nextPage != null){
           $scope.isLoading = true;
-          $scope.starship.list.concat($scope.starship.getPage(starshipPage++, function(){
+          $scope.starship.list.concat($scope.starship.getPage(starshipPage++, function(next){
+              nextPage = next;
               $scope.isLoading = false;
           }));
         }
@@ -161,7 +158,37 @@ app.controller('StarshipModalController', function($scope, $stateParams, $modalI
     };
 });
 
-app.controller('StarshipDetailController', function($scope, $stateParams, starship){
+app.controller('StarshipDetailController', function($scope, $stateParams, starship, starshipSimilar){
     $scope.id = $stateParams.id;
     $scope.starship = starship;
+    $scope.starship.similar = [];
+
+    starshipSimilar.data.results.forEach(function(item) {
+      if(item.name != $scope.starship.detail.name
+        && item.length < ($scope.starship.detail.length + 10)
+        && item.length > ($scope.starship.detail.length - 10)){
+          $scope.starship.similar.push(item);
+      }
+    });
+
+    $scope.nextPage = "";
+    var starshipPage = 2;
+    $scope.isLoading = false;
+
+    $scope.loadMoreSimilar = function() {
+        if (!$scope.isLoading && $scope.nextPage != null){
+          $scope.isLoading = true;
+          $scope.starship.getPage(starshipPage++, function(results, next){
+              results.forEach(function(item) {
+                if(item.name != $scope.starship.detail.name
+                  && item.length < ($scope.starship.detail.length + 10)
+                  && item.length > ($scope.starship.detail.length - 10)){
+                    $scope.starship.similar.push(item);
+                }
+              });
+              $scope.nextPage = next;
+              $scope.isLoading = false;
+          });
+        }
+    }
 });

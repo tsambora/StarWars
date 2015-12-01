@@ -35,10 +35,6 @@
   src: url(/fonts/Starjedi.ttf) format('truetype');
 }
 
-body{
-  padding-bottom: 20px;
-}
-
 body, ui-view {
   display: flex;
   min-height: 100vh;
@@ -84,6 +80,10 @@ nav form * {
 
 #starship-detail {
   margin: 0 64px 0 64px;
+}
+
+#starship-moredetail {
+  margin: 0 0 0 0;
 }
 
 #error-text {
